@@ -1,5 +1,6 @@
 import './styles/reset.css';
 import './styles/index.scss';
+import sendEmail from './js/emailService';
 import githubLogo from './assets/img/logo-github.png';
 import linkedinLogo from './assets/img/logo-linkedin.png';
 
@@ -10,10 +11,13 @@ const app = {
     isScrolling: false,
 
     init() {
+        const contactForm = document.querySelector('.contact__form');
+
         window.addEventListener('wheel', app.scrollToSection);
         app.sectionsContainer.addEventListener('transitionend', () => {
             app.setIsScrolling(false);
         });
+        contactForm.addEventListener('submit', app.sendEmail);
         app.addHeaderImages();
     },
 
@@ -56,6 +60,15 @@ const app = {
             imagesContainer.appendChild(link);
         });
 
+    },
+
+    sendEmail(e) {
+        e.preventDefault();
+        const name = e.target.elements.name.value;
+        const email = e.target.elements.email.value;
+        const message = e.target.elements.message.value;
+        document.querySelector('.contact__form__button').style.display = "none";
+        sendEmail({name, email, message});
     }
 };
 

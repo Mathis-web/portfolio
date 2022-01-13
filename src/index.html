@@ -145,11 +145,13 @@
                 </div>
                 <form class="contact__form">
                     <label for="name" class="contact__form__label">Nom</label>
-                    <input type="text" id="name" class="contact__form__input" name="name">
+                    <input type="text" id="name" class="contact__form__input" name="name" required>
                     <label for="email" class="contact__form__label">Adresse mail</label>
-                    <input type="text" id="email" class="contact__form__input" name="email">
+                    <input type="email" id="email" class="contact__form__input" name="email" required>
                     <label for="message" class="contact__form__label">Message</label>
-                    <textarea rows="5" id="message" class="contact__form__input" name="message"></textarea>
+                    <textarea rows="5" id="message" class="contact__form__input" name="message" required></textarea>
+                    <p class="message success"></p>
+                    <p class="message error"></p>
                     <button class="contact__form__button" type="submit">Envoyer</button>
                 </form>
             </div>

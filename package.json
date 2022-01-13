@@ -24,6 +24,7 @@
     "@babel/preset-env": "^7.16.7",
     "babel-loader": "^8.2.3",
     "css-loader": "^6.5.1",
+    "dotenv-webpack": "^7.0.3",
     "html-webpack-plugin": "^5.5.0",
     "node-sass": "^7.0.1",
     "sass-loader": "^12.4.0",
@@ -33,6 +34,7 @@
     "webpack-dev-server": "^4.7.2"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.4.0",
     "@fortawesome/fontawesome-free": "^5.15.4",
     "gsap": "^3.9.1"
   }

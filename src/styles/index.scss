@@ -180,6 +180,8 @@ body {
 
                 textarea {
                     resize: none;
+                    font-size: 1rem;
+                    font-family: 'Roboto', sans-serif;
                 }
 
                 &__button {
@@ -190,13 +192,26 @@ body {
                     border-radius: 50px;
                     border: none;
                     width: fit-content;
-                    margin: 1rem auto 0;
+                    margin: 0.5rem auto 0;
                     letter-spacing: 0.1em;
                     font-size: 1.2rem;
                     cursor: pointer;
                     transition: 0.3s;
                     &:hover {
                         background-color: #b52400;
+                    }
+                }
+
+                .message {
+                    font-size: 1.2rem;
+                    width: 100%;
+                    text-align: center;
+                    margin: 0.5rem 0;
+                    &.success {
+                        color: #23DC3D;
+                    }
+                    &.error {
+                        color: red;
                     }
                 }
             }
