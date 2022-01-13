@@ -12,6 +12,7 @@ module.exports = {
           template: './src/index.html',
         }),
     ],
+    devtool: 'source-map',
     module: {
         rules: [
             // ES6
