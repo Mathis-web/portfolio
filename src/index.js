@@ -1,8 +1,6 @@
 import './styles/reset.css';
 import './styles/index.scss';
 import sendEmail from './js/emailService';
-import githubLogo from './assets/img/logo-github.png';
-import linkedinLogo from './assets/img/logo-linkedin.png';
 
 const app = {
     sectionsContainer: document.querySelector('.container'),
@@ -18,7 +16,6 @@ const app = {
             app.setIsScrolling(false);
         });
         contactForm.addEventListener('submit', app.sendEmail);
-        app.addHeaderImages();
     },
 
     scrollToSection(e) {
@@ -41,25 +38,6 @@ const app = {
 
     setIsScrolling(bool) {
         app.isScrolling = bool;
-    },
-
-    addHeaderImages() {
-        const imagesContainer = document.querySelector('.header__links');
-        const imgArr = [
-            {src: linkedinLogo, alt: 'lien compte linkedin', link: 'https://www.linkedin.com/in/mathis-pati/'},
-            {src: githubLogo, alt: "lien compte github", link: 'https://github.com/Mathis-web'}
-        ];
-        imgArr.forEach(el => {
-            const img = document.createElement('img');
-            const link = document.createElement('a');
-            link.href = el.link;
-            link.className = "header__links__item";
-            img.src = el.src;
-            img.alt = el.alt;
-            link.appendChild(img);
-            imagesContainer.appendChild(link);
-        });
-
     },
 
     sendEmail(e) {
