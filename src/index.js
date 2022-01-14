@@ -1,7 +1,12 @@
 import './styles/reset.css';
 import './styles/index.scss';
+import './styles/responsive.scss';
 import sendEmail from './js/emailService';
-import {animStart, animSection, animMenu, animScrollToSection} from './js/anim';
+import {animStart, animSection, animMenu, animIntro} from './js/anim';
+
+let paddingValue;
+if(window.innerWidth > 600) paddingValue = 64;
+else paddingValue = 32;
 
 
 const app = {
@@ -41,7 +46,7 @@ const app = {
         // stop if user is on the last section
         if(app.sections.length - 1 === app.currentSectionIndex) return;
         app.currentSectionIndex++;
-        app.sectionsContainer.style.transform = `translateY(${app.currentSectionIndex * (-app.sectionsContainer.offsetHeight + 64)}px)`;
+        app.sectionsContainer.style.transform = `translateY(${app.currentSectionIndex * (-app.sectionsContainer.offsetHeight + paddingValue)}px)`;
         animSection(app.currentSectionIndex);
         app.setIsScrolling(true);
     },
@@ -50,7 +55,7 @@ const app = {
         // stop if user is on the first section
         if(app.currentSectionIndex === 0) return;
         app.currentSectionIndex--;
-        app.sectionsContainer.style.transform = `translateY(${app.currentSectionIndex * (-app.sectionsContainer.offsetHeight + 64)}px)`;
+        app.sectionsContainer.style.transform = `translateY(${app.currentSectionIndex * (-app.sectionsContainer.offsetHeight + paddingValue)}px)`;
         animSection(app.currentSectionIndex);
         app.setIsScrolling(true);
     },
@@ -84,7 +89,25 @@ const app = {
         const burger = document.querySelector('.burger');
         burger.classList.remove('active');
         animMenu(false)
-        animScrollToSection(e.target.dataset.index);
+        app.animScrollToSection(e.target.dataset.index);
+    },
+
+    animScrollToSection(index) {
+        const container = document.querySelector('.container');
+        if(index == 0) {
+            container.style.transform = `translateY(${index * (-container.offsetHeight + paddingValue)}px)`;
+            app.currentSectionIndex = index;
+            animIntro();
+        };
+        if(index == 1) {
+            container.style.transform = `translateY(${index * (-container.offsetHeight + paddingValue)}px)`;
+            app.currentSectionIndex = index;
+            animSection(1);
+        }
+        if(index == 5) {
+            container.style.transform = `translateY(${index * (-container.offsetHeight + paddingValue)}px)`
+            app.currentSectionIndex = index;
+        };
     }
 };
 

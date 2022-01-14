@@ -71,18 +71,5 @@ const animMenu = (bool) => {
     }
 }
 
-const animScrollToSection = (index) => {
-    const container = document.querySelector('.container');
-    if(index == 0) {
-        container.style.transform = `translateY(${index * (-container.offsetHeight + 64)}px)`;
-        animIntro();
-    };
-    if(index == 1) {
-        container.style.transform = `translateY(${index * (-container.offsetHeight + 64)}px)`;
-        animSection(1);
-    }
-    if(index == 5) container.style.transform = `translateY(${index * (-container.offsetHeight + 64)}px)`;
-};
-
-export {animSection, animStart, animMenu, animScrollToSection}
+export {animSection, animStart, animMenu, animIntro}
 

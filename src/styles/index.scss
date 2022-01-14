@@ -54,7 +54,6 @@ body {
     }
 
     .header {
-        padding: 1.5rem 0;
         position: absolute;
         padding: 2.5rem 2.5rem 0;
         width: calc(100% - 5rem);
@@ -85,7 +84,6 @@ body {
                 background-color: white;
                 border-radius: 10px;
                 transition: 0.3s;
-                // position: absolute;
 
                 &:first-child {
                     margin-bottom: 1rem;
@@ -352,4 +350,3 @@ body {
         }
     }
 }
-
