@@ -19,7 +19,7 @@ const animSection  = (index) => {
         .from(sepBar, {x: '-120%', duration: .7}, "<.1")
         .from(info, {x: '-120%', duration: .7}, '<.1')
         .from(btns, {x: '-100%', duration: .7}, '<.02')
-        .from(img, {x: '50px', scale: 0.7, duration: 1}, .4)
+        .from(img, {x: '50px', y: '50px', duration: 1}, .4)
     
 };
 
@@ -50,7 +50,7 @@ const animStart = () => {
     
     const tl = gsap.timeline();
     tl
-        .to(fullPage, {y: -window.innerHeight, duration: 0.8})
+        .to(fullPage, {y: '-110vh', duration: 0.8})
         .from(title, {x:'-100%', duration: .7}, "<.3")
         .from(sepBar, {x: '-120%', duration: .7}, "<.1")
         .from(info, {x: '-120%', duration: .7}, '<.1')
