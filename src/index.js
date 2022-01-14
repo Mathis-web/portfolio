@@ -1,6 +1,8 @@
 import './styles/reset.css';
 import './styles/index.scss';
 import sendEmail from './js/emailService';
+import {animStart, animSection} from './js/anim';
+
 
 const app = {
     sectionsContainer: document.querySelector('.container'),
@@ -16,24 +18,37 @@ const app = {
             app.setIsScrolling(false);
         });
         contactForm.addEventListener('submit', app.sendEmail);
+        setTimeout(() => {
+            animStart();
+        }, 500)
     },
 
     scrollToSection(e) {
         if(app.isScrolling) return;
         if(e.deltaY > 0) {
-            // stop if user is on the last section
-            if(app.sections.length - 1 === app.currentSectionIndex) return;
-            app.currentSectionIndex++;
-            app.sectionsContainer.style.transform = `translateY(${app.currentSectionIndex * -app.sectionsContainer.offsetHeight}px)`;
-            app.setIsScrolling(true);
+            app.scrollToTop();
         }
         if(e.deltaY < 0) {
-            // stop if user is on the first section
-            if(app.currentSectionIndex === 0) return;
-            app.currentSectionIndex--;
-            app.sectionsContainer.style.transform = `translateY(${app.currentSectionIndex * -app.sectionsContainer.offsetHeight}px)`;
-            app.setIsScrolling(true);
+            app.scrollToBottom();
         }
+    },
+
+    scrollToTop() {
+        // stop if user is on the last section
+        if(app.sections.length - 1 === app.currentSectionIndex) return;
+        app.currentSectionIndex++;
+        app.sectionsContainer.style.transform = `translateY(${app.currentSectionIndex * (-app.sectionsContainer.offsetHeight + 64)}px)`;
+        animSection(app.currentSectionIndex);
+        app.setIsScrolling(true);
+    },
+
+    scrollToBottom() {
+        // stop if user is on the first section
+        if(app.currentSectionIndex === 0) return;
+        app.currentSectionIndex--;
+        app.sectionsContainer.style.transform = `translateY(${app.currentSectionIndex * (-app.sectionsContainer.offsetHeight + 64)}px)`;
+        animSection(app.currentSectionIndex);
+        app.setIsScrolling(true);
     },
 
     setIsScrolling(bool) {
@@ -50,4 +65,4 @@ const app = {
     }
 };
 
-app.init();
+document.addEventListener('DOMContentLoaded', app.init());
