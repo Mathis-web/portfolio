@@ -20,7 +20,9 @@ const app = {
         const burger = document.querySelector('.burger');
         const menuItems = document.querySelectorAll('.menu__list__item');
 
-        window.addEventListener('wheel', app.scrollToSection);
+        window.addEventListener('wheel', app.handleWheelEvent);
+        window.addEventListener('touchstart', app.touchStart);
+        window.addEventListener('touchmove', app.touchMove);
         app.sectionsContainer.addEventListener('transitionend', () => {
             app.setIsScrolling(false);
         });
@@ -32,12 +34,41 @@ const app = {
         }, 500)
     },
 
-    scrollToSection(e) {
+    handleWheelEvent(e) {
         if(app.isScrolling) return;
-        if(e.deltaY > 0) {
-            app.scrollToTop();
+        let direction;
+        if(e.deltaY >= 0) {
+            direction = 'up';
         }
         if(e.deltaY < 0) {
+            direction = 'down';
+        }
+        app.scrollToSection(direction);
+    },
+
+    touchStart(e) {
+        app.touchY = e.touches[0].screenY;
+    },
+
+    touchMove(e) {
+        const currentY = e.touches[0].screenY;
+        // avoid scroll that are too small
+        const calc = app.touchY - currentY;
+        if(calc < 30 && calc > -30) return;
+        if(calc >= 0) {
+            app.scrollToSection('up')
+        }
+        if(calc < 0) {
+            app.scrollToSection('down');
+        }
+    },
+
+    scrollToSection(direction) {
+        if(app.isScrolling) return;
+        if(direction === 'up') {
+            app.scrollToTop();
+        }
+        if(direction === 'down') {
             app.scrollToBottom();
         }
     },
