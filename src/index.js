@@ -1,7 +1,7 @@
 import './styles/reset.css';
 import './styles/index.scss';
 import sendEmail from './js/emailService';
-import {animStart, animSection} from './js/anim';
+import {animStart, animSection, animMenu, animScrollToSection} from './js/anim';
 
 
 const app = {
@@ -12,12 +12,16 @@ const app = {
 
     init() {
         const contactForm = document.querySelector('.contact__form');
+        const burger = document.querySelector('.burger');
+        const menuItems = document.querySelectorAll('.menu__list__item');
 
         window.addEventListener('wheel', app.scrollToSection);
         app.sectionsContainer.addEventListener('transitionend', () => {
             app.setIsScrolling(false);
         });
         contactForm.addEventListener('submit', app.sendEmail);
+        burger.addEventListener('click', app.toggleMenu);
+        menuItems.forEach((item) => item.addEventListener('click', app.onClickMenuItem));
         setTimeout(() => {
             animStart();
         }, 500)
@@ -62,6 +66,25 @@ const app = {
         const message = e.target.elements.message.value;
         document.querySelector('.contact__form__button').style.display = "none";
         sendEmail({name, email, message});
+    },
+
+    toggleMenu() {
+        const burger = document.querySelector('.burger');
+        if(burger.classList.contains('active')) {
+            burger.classList.remove('active');
+            animMenu(false);
+        }
+        else {
+            burger.classList.add('active');
+            animMenu(true); 
+        }
+    },
+
+    onClickMenuItem(e) {
+        const burger = document.querySelector('.burger');
+        burger.classList.remove('active');
+        animMenu(false)
+        animScrollToSection(e.target.dataset.index);
     }
 };
 

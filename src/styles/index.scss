@@ -16,7 +16,41 @@ body {
         width: 100vw;
         background-color: black;
         z-index: 1000;
+    }
 
+    .menu {
+        // display: none;
+        width: 100vw;
+        height: 100vh;
+        transform: translateY(-100vh);
+        background-color: #FF3CAC;
+        background-image: linear-gradient(90deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+        position: absolute;
+        z-index: 2000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        &__list {
+            margin-bottom: 3rem;
+
+            &__item {
+                margin: 3rem 0;
+                color: white;
+                font-size: 6rem;
+                text-transform: uppercase;
+                letter-spacing: 0.2rem;
+                font-weight: bold;
+                overflow: hidden;
+                cursor: pointer;
+
+                span {
+                    display: block;
+                }
+                
+            }
+        }
     }
 
     .header {
@@ -41,18 +75,43 @@ body {
             z-index: 1100;
         }
 
+        .burger {
+            padding: 0.8rem 0;
+            cursor: pointer;
+            
+            .burger-bar {
+                width: 45px;
+                height: 3px;
+                background-color: white;
+                border-radius: 10px;
+                transition: 0.3s;
+                // position: absolute;
+
+                &:first-child {
+                    margin-bottom: 1rem;
+                }
+            }
+
+            &.active .burger-bar:first-child {
+                transform: rotate(45deg) translateY(50%);
+                margin-bottom: 0;
+            }
+            &.active .burger-bar:last-child {
+                transform: rotate(-45deg) translateY(-50%);
+            }
+        }
+
         &__links {
+            display: flex;
+            align-items: center;
             &__item {
                 color: white;
                 font-size: 2.5rem;
                 text-decoration: none;
+                margin-right: 1.5rem;
 
                 img {
-                    height: 40px;
-                }
-
-                &:first-child {
-                    margin-right: 1rem;
+                    height: 42px;
                 }
             }
         }

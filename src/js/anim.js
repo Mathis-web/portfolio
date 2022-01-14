@@ -35,11 +35,11 @@ const animIntro = () => {
         .from(title, {x:'-100%', duration: .7, delay: .4})
         .from(sepBar, {x: '-120%', duration: .7}, "<.1")
         .from(info, {x: '-120%', duration: .7}, "<.1")
-        .from(portfolioTitle, {x: '100%', duration: .7}, .4);
+        .from(portfolioTitle, {x: '120%', duration: .7}, .4);
 };
 
 const animStart = () => {
-    setTimeout(() => document.querySelector('.header').style.zIndex = 1000, 1000);
+    setTimeout(() => document.querySelector('.header').style.zIndex = 3000, 1000);
 
     const fullPage = document.querySelector('.fullpage-anim');
     const section = document.querySelector(`.section[data-index="0"]`);
@@ -55,7 +55,34 @@ const animStart = () => {
         .from(sepBar, {x: '-120%', duration: .7}, "<.1")
         .from(info, {x: '-120%', duration: .7}, '<.1')
         .from(portfolioTitle, {x: '100%', duration: .8}, .3);
+};
+
+const animMenu = (bool) => {
+    const menu = document.querySelector('.menu');
+    const menuItems = document.querySelectorAll('.menu__list__item span')
+    const tl = gsap.timeline();
+    if(bool) {
+        tl
+            .to(menu, {y: 0, duration: .5})
+            .from(menuItems, {y: '100%', duration: .2});
+    }
+    else {
+        tl.to(menu, {y: '-100vh', duration: .5});
+    }
 }
 
-export {animSection, animStart}
+const animScrollToSection = (index) => {
+    const container = document.querySelector('.container');
+    if(index == 0) {
+        container.style.transform = `translateY(${index * (-container.offsetHeight + 64)}px)`;
+        animIntro();
+    };
+    if(index == 1) {
+        container.style.transform = `translateY(${index * (-container.offsetHeight + 64)}px)`;
+        animSection(1);
+    }
+    if(index == 5) container.style.transform = `translateY(${index * (-container.offsetHeight + 64)}px)`;
+};
+
+export {animSection, animStart, animMenu, animScrollToSection}
 
