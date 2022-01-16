@@ -1,19 +1,17 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const {default: MiniCssExtractPlugin} = require("mini-css-extract-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js'
+        filename: '[name].[contenthash].js'
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-          template: './src/index.html',
-        }),
-        new Dotenv(),
-    ],
     devtool: 'source-map',
     module: {
         rules: [
@@ -24,19 +22,14 @@ module.exports = {
                 use: {
                     loader: "babel-loader",
                     options: {
-                      presets: ['@babel/preset-env']
+                        presets: ['@babel/preset-env']
                     }
                 }
             },
-            // css
+            // css, sass, scss
             {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
-            },
-            // sass, scss
-            {
-                test: /\.scss$/,
-                use: ['style-loader', 'css-loader', 'sass-loader']
+                test: /\.(s[ac]ss|css)$/i,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
             },
             {
                 test: /\.html$/i,
@@ -49,6 +42,26 @@ module.exports = {
             },
         ],
     },
+    plugins: [
+        new HtmlWebpackPlugin({
+          template: './src/index.html',
+          minify: {
+            removeComments: true,
+            collapseWhitespace: true
+          }
+        }),
+        new MiniCssExtractPlugin({
+            filename: '[name].css'
+        }),
+        new Dotenv(),
+        new CleanWebpackPlugin(),
+        new UglifyJsPlugin()
+    ],
+    optimization: {
+        minimizer: [
+          new CssMinimizerPlugin(),
+        ],
+      },
     devServer: {
         static: './dist',
         hot: true,
