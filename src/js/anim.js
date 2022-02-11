@@ -30,17 +30,18 @@ const animStart = () => {
     setTimeout(() => document.querySelector('.header').style.zIndex = 3000, 1000);
     const tl = gsap.timeline();
 
-    if(window.innerWidth > 700) {
+    // if(window.innerWidth > 700) {
         tl
             .to('.fullpage-anim', {y: '-110vh', duration: 0.8})
             .from('.section[data-index="0"] .section__content__title', {x:'-100%', duration: .7}, "<.3")
             .from('.section[data-index="0"] .section__content__sep-bar-container', {x: '-120%', duration: .7}, "<.1")
             .from('.section[data-index="0"] .section__content__info', {x: '-120%', duration: .7}, '<.1')
             .from('.section[data-index="0"] .portfolio', {x: '100%', duration: .8}, .3);
-    }
-    else {
-        gsap.to('.fullpage-anim', {y: '-110vh', duration: 0.8})
-    }
+
+    // }
+    // else {
+    //     gsap.to('.fullpage-anim', {y: '-110vh', duration: 0.8})
+    // }
 };
 
 const animMenu = (bool) => {

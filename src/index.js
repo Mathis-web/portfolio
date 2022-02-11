@@ -4,17 +4,12 @@ import './styles/responsive.scss';
 import sendEmail from './js/emailService';
 import {animStart, animSection, animMenu, animIntro} from './js/anim';
 
-let paddingValue;
-let isUserOnComputer = true;
-
-if(window.innerWidth > 600) paddingValue = 60;
-else paddingValue = 30;
-
+// let isUserOnComputer = true;
 // delete section animations on mobile beacause of performance issue
-if(window.innerWidth < 700) isUserOnComputer = false;
+// if(window.innerWidth < 700) isUserOnComputer = false;
 
 const app = {
-    sectionsContainer: document.querySelector('.container'),
+    sectionsContainer: document.querySelector('.slider'),
     currentSectionIndex: 0,
     sections: document.querySelectorAll('.section'),
     isScrolling: false,
@@ -80,20 +75,22 @@ const app = {
     scrollToTop() {
         // stop if user is on the last section
         if(app.sections.length - 1 === app.currentSectionIndex) return;
-        const heightToScroll = -app.sectionsContainer.offsetHeight + paddingValue;
+        const heightToScroll = -app.sectionsContainer.offsetHeight;
         app.currentSectionIndex++;
         app.sectionsContainer.style.transform = `translateY(${app.currentSectionIndex * heightToScroll}px)`;
-        if(isUserOnComputer) animSection(app.currentSectionIndex);
+        // if(isUserOnComputer) animSection(app.currentSectionIndex);
+        animSection(app.currentSectionIndex)
         app.setIsScrolling(true);
     },
 
     scrollToBottom() {
         // stop if user is on the first section
         if(app.currentSectionIndex === 0) return;
-        const heightToScroll = -app.sectionsContainer.offsetHeight + paddingValue;
+        const heightToScroll = -app.sectionsContainer.offsetHeight;
         app.currentSectionIndex--;
         app.sectionsContainer.style.transform = `translateY(${app.currentSectionIndex * heightToScroll}px)`;
-        if(isUserOnComputer) animSection(app.currentSectionIndex);
+        // if(isUserOnComputer) animSection(app.currentSectionIndex);
+        animSection(app.currentSectionIndex);
         app.setIsScrolling(true);
     },
 
@@ -131,16 +128,18 @@ const app = {
 
     animScrollToSection(index) {
         const container = document.querySelector('.container');
-        const heightToScroll = -container.offsetHeight + paddingValue
+        const heightToScroll = -container.offsetHeight;
         if(index == 0) {
             container.style.transform = `translateY(${index * heightToScroll}px)`;
             app.currentSectionIndex = index;
-            if(isUserOnComputer) animIntro();
+            // if(isUserOnComputer) animIntro();
+            animIntro();
         };
         if(index == 1) {
             container.style.transform = `translateY(${index * heightToScroll}px)`;
             app.currentSectionIndex = index;
-            if(isUserOnComputer) animSection(1);
+            // if(isUserOnComputer) animSection(1);
+            animSection(1);
         }
         if(index == 5) {
             container.style.transform = `translateY(${index * heightToScroll}px)`
@@ -149,4 +148,4 @@ const app = {
     }
 };
 
-document.addEventListener('DOMContentLoaded', app.init());
+window.addEventListener('load', app.init);

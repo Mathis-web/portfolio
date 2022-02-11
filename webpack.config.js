@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const {default: MiniCssExtractPlugin} = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
